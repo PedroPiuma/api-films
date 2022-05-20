@@ -10,11 +10,24 @@ export const getAllMovies = async (request, reply) => {
     }
 };
 
+export const getUniqueMovie = async (request, reply) => {
+    try {
+        const { id } = request.params
+        console.log(id)
+        const movie = await prisma.movie.findUnique({
+            where: { id: Number(id) },
+        })
+        console.log(movie)
+        reply.status(200).send(movie)
+    } catch (error) {
+        reply.status(500).send("Não foi possível encontror o filme")
+    }
+}
+
 export const createMovie = async (request, reply) => {
     try {
-        console.log(request.body)
-        const { title, description, gender_id, user_id } = request.body
-
+        const { id } = request.user
+        const { title, description, gender_id } = request.body
         const post = await prisma.movie.create({
             data: {
                 title,
@@ -23,10 +36,11 @@ export const createMovie = async (request, reply) => {
                     connect: { id: Number(gender_id) }
                 },
                 user: {
-                    connect: { id: Number(user_id) }
+                    connect: { id: Number(id) }
                 }
             }
         })
+        reply.status(201).send(post)
     } catch (error) {
         reply.status(500).send("Não foi possível criar o filme")
     }

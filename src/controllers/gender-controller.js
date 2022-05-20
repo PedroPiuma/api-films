@@ -15,11 +15,12 @@ export const createGender = async (request, reply) => {
         console.log(request.body)
         const { name } = request.body
 
-        const post = await prisma.gender.create({
+        const gender = await prisma.gender.create({
             data: {
                 name
             }
         })
+        reply.status(201).send(gender)
     } catch (error) {
         reply.status(500).send("Não foi possível criar o gênero")
     }
