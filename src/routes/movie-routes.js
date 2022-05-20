@@ -18,4 +18,16 @@ export default {
         preHandler: [validateRequest],
         handler: moviesController.createMovie
     },
+    updateMovie: {
+        method: "PATCH",
+        url: "/movies/:id",
+        preHandler: [validateRequest],
+        handler: moviesController.updateMovie
+    },
+    deleteMovie: {
+        method: "DELETE",
+        url: "/movies/:id",
+        preHandler: [validateRequest],
+        handler: moviesController.deleteMovie
+    },
 };

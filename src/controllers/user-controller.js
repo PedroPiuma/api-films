@@ -3,7 +3,7 @@ import { prisma } from "../helpers/utils.js";
 export const index = async (req, res) => {
   try {
     let users = await prisma.user.findMany({
-      select: { email: true },
+      select: { email: true, name: true },
     });
     return res.send({ data: { users } });
   } catch (error) {

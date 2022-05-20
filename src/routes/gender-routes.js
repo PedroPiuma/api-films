@@ -13,4 +13,16 @@ export default {
         preHandler: [validateRequest],
         handler: genderController.createGender
     },
+    deleteGender: {
+        method: "DELETE",
+        url: "/gender/:id",
+        preHandler: [validateRequest],
+        handler: genderController.deleteGender
+    },
+    updateGender: {
+        method: "PUT",
+        url: "/gender/:id",
+        preHandler: [validateRequest],
+        handler: genderController.updateGender
+    },
 };
